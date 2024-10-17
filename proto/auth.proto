@@ -41,7 +41,7 @@ message User {
     string email = 2;
     string password = 3;
     bool active = 4;
-    ContactInformation ContactInformation = 5;
+    ContactInformation contactInformation = 5;
 }
 
 message ContactInformation {

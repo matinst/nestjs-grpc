@@ -41,7 +41,7 @@ export interface User {
   email: string;
   password: string;
   active: boolean;
-  ContactInformation: ContactInformation | undefined;
+  contactInformation: ContactInformation | undefined;
 }
 
 export interface ContactInformation {
