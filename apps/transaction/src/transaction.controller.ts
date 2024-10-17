@@ -1,12 +1,19 @@
 import { Controller, Get } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
+import { CreateTransactionRequest, GetUserTransactionsRequest, TransactionServiceController, TransactionServiceControllerMethods } from '@app/common/types/transaction';
 
 @Controller()
-export class TransactionController {
+@TransactionServiceControllerMethods()
+export class TransactionController implements TransactionServiceController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  @Get()
-  getHello(): string {
-    return this.transactionService.getHello();
+  createTransaction(createTransactionDto:CreateTransactionRequest) {
+    return this.transactionService.createTransaction(createTransactionDto);
   }
+
+  getUserTransactions(getUserTransactions: GetUserTransactionsRequest) {
+    return this.transactionService.getUserTransactions(getUserTransactions.userId)
+  }
+
+
 }

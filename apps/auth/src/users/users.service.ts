@@ -19,7 +19,7 @@ export class UsersService implements OnModuleInit {
       id: randomUUID(),
       active: false,
       contactInformation: {},
-      balance: 0
+      balance: 100
     }
     this.users.push(user)
     return user

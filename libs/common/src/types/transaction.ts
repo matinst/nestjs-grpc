@@ -2,10 +2,79 @@
 // versions:
 //   protoc-gen-ts_proto  v2.2.4
 //   protoc               v5.29.0
-// source: proto/transaction.proto
+// source: transaction.proto
 
 /* eslint-disable */
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
-export const protobufPackage = "";
+export const protobufPackage = "transaction";
 
-export const _PACKAGE_NAME = "";
+export interface Transactions {
+  transactions: Transaction[];
+}
+
+export interface CreateTransactionRequest {
+  senderId: string;
+  amount: number;
+  receiverId: string;
+  time: string;
+  success: boolean;
+}
+
+export interface Transaction {
+  id: string;
+  senderId: string;
+  amount: number;
+  receiverId: string;
+  time: string;
+  success: boolean;
+}
+
+export interface GetUserTransactionsRequest {
+  userId: string;
+}
+
+export interface TransactionRequest {
+  userId: string;
+  amount: number;
+}
+
+export interface TransactionResponse {
+  success: boolean;
+  message: string;
+  balance: number;
+}
+
+export const TRANSACTION_PACKAGE_NAME = "transaction";
+
+export interface TransactionServiceClient {
+  createTransaction(request: CreateTransactionRequest): Observable<Transaction>;
+
+  getUserTransactions(request: GetUserTransactionsRequest): Observable<Transactions>;
+}
+
+export interface TransactionServiceController {
+  createTransaction(request: CreateTransactionRequest): Promise<Transaction> | Observable<Transaction> | Transaction;
+
+  getUserTransactions(
+    request: GetUserTransactionsRequest,
+  ): Promise<Transactions> | Observable<Transactions> | Transactions;
+}
+
+export function TransactionServiceControllerMethods() {
+  return function (constructor: Function) {
+    const grpcMethods: string[] = ["createTransaction", "getUserTransactions"];
+    for (const method of grpcMethods) {
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod("TransactionService", method)(constructor.prototype[method], method, descriptor);
+    }
+    const grpcStreamMethods: string[] = [];
+    for (const method of grpcStreamMethods) {
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod("TransactionService", method)(constructor.prototype[method], method, descriptor);
+    }
+  };
+}
+
+export const TRANSACTION_SERVICE_NAME = "TransactionService";
