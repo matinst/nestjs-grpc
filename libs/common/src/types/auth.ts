@@ -42,6 +42,7 @@ export interface User {
   password: string;
   active: boolean;
   contactInformation: ContactInformation | undefined;
+  balance: number;
 }
 
 export interface ContactInformation {

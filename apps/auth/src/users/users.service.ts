@@ -1,4 +1,4 @@
-import { CreateUserRequest, PaginationRequest, UpdateUserRequest, User, Users } from '@app/common';
+import { CreateUserRequest, PaginationRequest, UpdateUserRequest, User, Users } from '@app/common/types/auth';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { Observable, Subject } from 'rxjs';
@@ -19,6 +19,7 @@ export class UsersService implements OnModuleInit {
       id: randomUUID(),
       active: false,
       contactInformation: {},
+      balance: 0
     }
     this.users.push(user)
     return user

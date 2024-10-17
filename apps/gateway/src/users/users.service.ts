@@ -1,4 +1,4 @@
-import { CreateUserRequest, PaginationRequest, USER_SERVICE_NAME, UpdateUserRequest, UserServiceClient } from '@app/common';
+import { CreateUserRequest, PaginationRequest, USER_SERVICE_NAME, UpdateUserRequest, UserServiceClient } from '@app/common/types/auth';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { AUTH_SERVICE } from './constants';
 import { ClientGrpc } from '@nestjs/microservices';
