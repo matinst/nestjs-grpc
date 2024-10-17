@@ -10,23 +10,23 @@ import { join } from 'path';
   imports: [
     ClientsModule.register([
       {
-        name: TRANSACTION_SERVICE,
-        transport: Transport.GRPC,
-        options: {
-          package: TRANSACTION,
-          protoPath: join(__dirname, '../transaction.proto')
-        }
-      },
-      {
         name: AUTH_SERVICE,
         transport: Transport.GRPC,
         options: {
           package: AUTH,
           protoPath: join(__dirname, '../auth.proto')
         }
+      },
+      {
+        name: TRANSACTION_SERVICE,
+        transport: Transport.GRPC,
+        options: {
+          package: TRANSACTION,
+          protoPath: join(__dirname, '../transaction.proto')
+        }
       }
     ]
-    )]
+    )],
   controllers: [TransactionController],
   providers: [TransactionService],
 })
