@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package auth;
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (User){};
+    rpc GetUsers(Empty) returns (Users){};
+    rpc GetUser(GetUserRequest) returns (User){};
+    rpc UpdateUser(UpdateUserRequest) returns (User){};
+    rpc RemoveUser(GetUserRequest) returns (User){};
+    rpc QueryUsers(stream PaginationRequest) returns (stream Users){};
+}
+
+message CreateUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message Empty {};
+
+message Users {
+    repeated User users = 1;
+}
+
+message GetUserRequest {
+    string id = 1;
+}
+
+message UpdateUserRequest {
+    string id = 1;
+    ContactInformation contactInformation = 2;
+}
+
+message PaginationRequest {
+    int32 page = 1;
+    int32 skip = 2;
+}
+
+message User {
+    string id = 1;
+    string email = 2;
+    string password = 3;
+    bool active = 4;
+    ContactInformation ContactInformation = 5;
+}
+
+message ContactInformation {
+    optional string phone = 1;
+    optional string tlgId = 2;
+}
